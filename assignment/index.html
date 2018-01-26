@@ -54,11 +54,71 @@
       Start code
 
       ===================== */
+      //var jsonToCsv = function(json) { console.log(json); };
 
-      var jsonToCsv = function(json) { console.log(json); };
+      // This is for creating an array for reformatting all the health centers
+      //creating the first array, keys of healthCenters
+      keylist = Object.keys(healthCenters[0]);
 
+      //creating rows of records for each healthCenter
+      array = [keylist];
+      var jsonToCsv = function(healthCenters) {
+      for (var i=0; i < healthCenters.length; i = i + 1) {
+               var list = [];
+               for (var j=0; j < Object.keys(healthCenters[0]).length; j = j + 1){
+                 addlist = (healthCenters[i])[keylist[j]],
+                 list.push(addlist)
+                 ;};
+                 array.push(list);
+               };
+                 console.log(array);};
 
-      var addMarkers = function(map) {};
+      //Adding markers and popups for each locations
+      //Add markers
+      DentalIcon = L.icon({
+      iconUrl: 'images/dental.png',
+      shadowUrl: 'images/marker-shadow.png'
+      });
+
+      //unsuccessful one
+      //for (var i=0; i < healthCenters.length; i = i + 1) {
+      //        lon = (healthCenters[i])[(Object.keys(healthCenters[0]))[0]];
+      //        lat = (healthCenters[i])[(Object.keys(healthCenters[0]))[1]];
+      //        name = (healthCenters[i])[(Object.keys(healthCenters[0]))[3]];
+      //        L.marker([lat,lon]).addTo(map);
+      //        layer = L.marker([lat,lon], {icon: DentalIcon}).bindPopup(name).addTo(map);
+        //      layer.openPopup();
+      //        layer.closePopup(); };
+
+      var addMarkers = function(map) {
+        for (var i=0; i < healthCenters.length; i = i + 1) {
+              lon = (healthCenters[i])[(Object.keys(healthCenters[0]))[0]];
+              lat = (healthCenters[i])[(Object.keys(healthCenters[0]))[1]];
+              Name_healthCenters = (healthCenters[i])[(Object.keys(healthCenters[0]))[3]];
+              Dental = (healthCenters[i])[(Object.keys(healthCenters[0]))[8]];
+              if (Dental!=='N/A'){layer = L.marker([lat,lon], {icon: DentalIcon}).bindPopup(Name_healthCenters).addTo(map);
+              layer.openPopup();
+              layer.closePopup();} else {layer = L.marker([lat,lon]).bindPopup(Name_healthCenters).addTo(map);
+              layer.openPopup();
+              layer.closePopup()};
+               };
+      };
+
+//unsuccessful two
+  //    for (var i=0; i < healthCenters.length; i = i + 1) {
+//                      lon = (healthCenters[i])[(Object.keys(healthCenters[0]))[0]],
+  //                    lat = (healthCenters[i])[(Object.keys(healthCenters[0]))[1]],
+//                      name = (healthCenters[i])[(Object.keys(healthCenters[0]))[3]],
+//                      dental = (healthCenters[i])[(Object.keys(healthCenters[0]))[8]],
+//                      zip = (healthCenters[i])[(Object.keys(healthCenters[0]))[5]],
+//                      if (dental === "N/A"){L.marker([lat,lon]).addTo(map),
+//                      layer = L.marker([lat,lon]).bindPopup(name).addTo(map);
+//                      layer.openPopup();
+//                      layer.closePopup()} else { myIcon = L.icon({
+//            iconUrl: 'D:/692/OST4GIS-week2-master/OST4GIS-week2-master/assignment/images/dental.png',
+//            shadowUrl: 'D:/692/OST4GIS-week2-master/OST4GIS-week2-master/assignment/images/marker-shadow.png'
+//        });
+//        L.marker([lat,lon], {icon: myIcon}).addTo(map);}};
 
       /* =====================
 
